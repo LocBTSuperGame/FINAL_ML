@@ -1,141 +1,30 @@
 # MALLORN Astronomical Classification Challenge (TDE Detection)
 
-> Machine Learning project for **photometric classification of astronomical transients**, with focus on **Tidal Disruption Events (TDEs)** from simulated LSST lightcurves (MALLORN dataset).
+> Machine Learning project for **photometric classification of astronomical transients**, focusing on **Tidal Disruption Events (TDEs)** from simulated **LSST** lightcurves (MALLORN dataset).
 
-**Score (public/private on leaderboard):** `0.5722`  
+**Kaggle:** https://www.kaggle.com/competitions/mallorn-astronomical-classification-challenge/overview  
+**Score (leaderboard):** `0.5722`  
 **Last updated:** 2025-12-24
 
 ---
 
-## 1) Overview
+## Overview
 
-The **Vera C. Rubin Observatory / LSST** will soon discover *orders of magnitude* more time-domain transients (e.g., supernovae) than ever before. However, spectroscopic follow-up resources are limited, so we need ML models that can classify objects **using only lightcurves** (brightness vs time).
-
-This repository implements a pipeline to identify **Tidal Disruption Events (TDEs)** — events where a star is torn apart by a supermassive black hole. TDEs are rare (~100 confirmed historically) but extremely valuable for studying black holes and accretion physics.
-
-**Goal:** Train a model that can **photometrically identify TDEs** within the simulated LSST dataset (based on ZTF observations + LSST cadence simulation).
+The **Vera C. Rubin Observatory (LSST)** will discover vastly more time-domain transients than ever before, making full spectroscopic follow-up impossible. This project trains an ML model to classify objects **using only lightcurves**, with emphasis on detecting **TDEs** (a star disrupted by a supermassive black hole).
 
 ---
 
-## 2) Competition / Dataset Context
+## Dataset
 
-This work is based on the:
-
-**MALLORN (Many Artificial LSST Lightcurves based on Observations of Real Nuclear transients) Classifier Challenge**
+**MALLORN (Many Artificial LSST Lightcurves based on Observations of Real Nuclear transients)**
 
 - Lightcurves are **simulated LSST observations**
-- Simulations are based on **real ZTF lightcurves**
+- Simulations are based on **real ZTF** observations
 - Additional bands are generated using **SNCosmo**
 - LSST cadence is implemented using the **Rubin Survey Simulator baseline**
 
-Google Colab notebooks are provided by the organisers for data usage and generation details.
-
 ---
 
-## 3) Repository Contents (suggested)
+## Result
 
-> Adjust these paths/names to match your repo structure.
-
-- `notebooks/` — Experiments, EDA, training notebooks
-- `src/` — Core training / feature engineering / inference code
-- `configs/` — YAML/JSON config files (model, training, folds)
-- `models/` — Saved models / checkpoints (optional, usually gitignored)
-- `outputs/` — Predictions, logs, submission files
-- `requirements.txt` / `environment.yml` — Dependencies
-
----
-
-## 4) Method Summary
-
-This solution typically follows the pipeline:
-
-1. **Load lightcurve data** (object_id, time, flux/mag, band, errors, etc.)
-2. **Preprocess**
-   - Handle missing observations / irregular sampling
-   - Normalization per object and/or per band
-3. **Feature engineering** (example ideas)
-   - Per-band stats: mean, std, skew, kurtosis, MAD
-   - Time-series shape: rise/decay rates, peak time, amplitude
-   - Color features: differences across bands around peak
-   - Observation cadence features: gaps, counts, coverage
-4. **Model training**
-   - Classical ML (e.g., LightGBM / XGBoost / CatBoost) or Deep Learning
-   - Cross-validation / stratified folds
-5. **Inference & submission**
-   - Predict probability of TDE class
-   - Export to submission format required by the competition
-
-> If your repo uses a specific model (e.g., LightGBM), you can add it here explicitly.
-
----
-
-## 5) How to Run
-
-### 5.1 Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-If you use Conda:
-
-```bash
-conda env create -f environment.yml
-conda activate mallorn
-```
-
-### 5.2 Train
-
-```bash
-python -m src.train --config configs/train.yaml
-```
-
-### 5.3 Predict / Create submission
-
-```bash
-python -m src.predict --config configs/predict.yaml --out outputs/submission.csv
-```
-
----
-
-## 6) Results
-
-- **Leaderboard score:** `0.5722`
-- Notes:
-  - Performance depends strongly on feature design for irregular time series.
-  - Robust validation (fold split by `object_id`) is recommended to avoid leakage.
-
----
-
-## 7) Reproducibility
-
-To reproduce results:
-- Fix random seeds (numpy / torch / lightgbm)
-- Save exact config used for the run
-- Keep a record of:
-  - dataset version
-  - feature set version
-  - fold strategy
-  - model hyperparameters
-
----
-
-## 8) References (background reading)
-
-- Tidal disruption events overview references (as mentioned in the prompt): (1) (2)
-- Rubin Observatory LSST: https://rubinobservatory.org/
-- Zwicky Transient Facility (ZTF): https://www.ztf.caltech.edu/
-- SNCosmo: https://sncosmo.readthedocs.io/
-
----
-
-## 9) Acknowledgements
-
-DM acknowledges a studentship funded through the **Leverhulme Interdisciplinary Network on Algorithmic Solutions**.  
-MN is supported by the **European Research Council (ERC)** under the European Union’s Horizon 2020 research and innovation programme (grant agreement No. 948381).
-
-The data used to produce this data set was sourced from the **Zwicky Transient Facility**.  
-The **SNCosmo** package and included models were used to generate data for other bands from existing ZTF observations.  
-The **Rubin Survey Simulator baseline** was used to implement accurate LSST cadence into the lightcurves.
-
----
+- **Best leaderboard score:** `0.5722`
