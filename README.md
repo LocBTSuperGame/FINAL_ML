@@ -3,7 +3,7 @@
 > Machine Learning project for **photometric classification of astronomical transients**, focusing on **Tidal Disruption Events (TDEs)** from simulated **LSST** lightcurves (MALLORN dataset).
 
 **Kaggle:** https://www.kaggle.com/competitions/mallorn-astronomical-classification-challenge/overview  
-**Score (leaderboard):** `0.58`  
+**Score (leaderboard):** `0.6356`  
 **Last updated:** 2025-12-24
 
 ---
@@ -24,7 +24,3 @@ The **Vera C. Rubin Observatory (LSST)** will discover vastly more time-domain t
 - LSST cadence is implemented using the **Rubin Survey Simulator baseline**
 
 ---
-
-## Result
-
-- **Best leaderboard score:** `0.6356`
